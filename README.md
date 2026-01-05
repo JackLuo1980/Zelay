@@ -33,6 +33,28 @@ bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_manage
 * `webport`: 面板访问端口（默认 3000，可根据需要修改）
 * `agentport`: Agent 通信端口（默认 3001，用于节点与面板通信）
 
+
+<details> <summary><b>🛠️ 点击查看：其他命令（更新/卸载）</b></summary>
+
+面板更新
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_manager.sh) --update
+```
+Agent更新
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_agent.sh) --update
+```
+
+卸载面板
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_manager.sh) --uninstall
+```
+卸载Agent
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_agent.sh) --uninstall
+```
+</details>
+
 ## 🎉 开始使用
 
 1. **访问面板**
