@@ -5,16 +5,28 @@
 ## 💡 开发初衷：为什么会有 Zelay？
 
 作为一名 Realm 的长期用户，我发现市面上的工具往往处于两个极端：开源脚本大多依赖 SSH 登录，多台服务器管理起来非常头疼；而现有的面板大多收费，有些需要依赖 Docker 部署，对个人用户的小型服务器来说，既繁琐又占用资源。
+
 Zelay 因此应运而生，只为解决一个核心问题：如何让个人用户最轻松地管理Realm
 
-## Zelay 的核心优势：
+## ✨ 核心优势
 
-* **⚡ 原生内核**：基于 Realm 原生内核开发，拒绝臃肿，确保极低延迟与高效转发。
-* **💻 统一管理**：采用 Agent 模式，无需 SSH 逐个登录，通过 Web 面板即可集中管控所有节点。
-* **🪶 极致轻量**：单文件部署，资源占用极低，完美兼容各类小型服务器（NAT/VPS）。
-* **🚀 一键部署**：傻瓜式安装流程，无需手动配置环境，即装即用。
+| 特性 | 说明 |
+|------|------|
+| ⚡ **原生内核** | 基于 Realm 原生内核开发，拒绝臃肿，确保极低延迟与高效转发 |
+| 💻 **统一管理** | 采用 Agent 模式，无需 SSH 逐个登录，通过 Web 面板即可集中管控所有节点 |
+| 🪶 **极致轻量** | 单文件部署，资源占用极低，完美兼容各类小型服务器（NAT/VPS） |
+| 🚀 **一键部署** | 傻瓜式安装流程，无需手动配置环境，即装即用 |
+| 🔀 **端口复用** | 单端口转发多目标，完美解决 NAT/IX 端口不足问题 **[\[查看指南\]](./Multiplex.md)** |
 
 ![Zelay面板预览](https://raw.githubusercontent.com/enp6/Zelay/main/review.png)
+
+## 📚 文档导航
+
+- 📖 [快速开始](#-快速安装指南) - 一键部署面板
+- 🔀 [端口复用指南](./Multiplex.md) - 解决 IX/NAT 端口不足问题
+- 💬 [Telegram 群组](https://t.me/zelaygroup) - 交流与反馈
+
+---
 
 ## 🛠️ 快速安装指南
 
@@ -33,63 +45,78 @@ bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_manage
 * `webport`: 面板访问端口（默认 3000，可根据需要修改）
 * `agentport`: Agent 通信端口（默认 3001，用于节点与面板通信）
 
+<details>
+<summary><b>🛠️ 点击查看：其他命令（更新/卸载）</b></summary>
 
-<details> <summary><b>🛠️ 点击查看：其他命令（更新/卸载）</b></summary>
-
-面板更新
+**面板更新**
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_manager.sh) --update
 ```
-Agent更新
+
+**Agent更新**
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_agent.sh) --update
 ```
 
-卸载面板
+**卸载面板**
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_manager.sh) --uninstall
 ```
-卸载Agent
+
+**卸载Agent**
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_agent.sh) --uninstall
 ```
 </details>
 
+---
+
 ## 🎉 开始使用
 
 1. **访问面板**
-* `http://your-server-ip:3000`
-
+   * `http://your-server-ip:3000`
 
 2. **创建管理员账号**
-* 首次访问会自动跳转到注册页面
-* 设置用户名和密码
-* 建议使用强密码
-
+   * 首次访问会自动跳转到注册页面
+   * 设置用户名和密码
+   * 建议使用强密码
 
 3. **登录面板**
-* 使用刚创建的账号登录
-* 进入管理界面
-
+   * 使用刚创建的账号登录
+   * 进入管理界面
 
 4. **创建 Agent**
-* 点击「添加 Agent」按钮
-* 填写 Agent 名称（如：`node-1`）
-* 系统自动生成 API Key
-
+   * 点击「添加 Agent」按钮
+   * 填写 Agent 名称（如`node-1`）
+   * 系统自动生成 API Key
 
 5. **部署 Agent**
-* 复制面板提供的部署命令
-* 在目标服务器上执行
-* Agent 自动连接到面板
-
+   * 复制面板提供的部署命令
+   * 在目标服务器上执行
+   * Agent 自动连接到面板
 
 6. **配置转发规则**
-* 在 Agent 详情页添加转发规则
-* 设置监听地址和远程地址
-* 实时生效，无需重启
+   * 在 Agent 详情页添加转发规则
+   * 设置监听地址和远程地址
+   * 实时生效，无需重启
 
+---
 
+## 🔀 端口复用功能
+
+> 💡 **适用场景**：IX、NAT 等端口资源有限的服务器
+
+端口复用允许单个端口转发到多个不同目标，大幅减少所需的公网端口数量。
+
+**👉 [查看端口复用配置指南](./Multiplex.md)**
+
+```
+前置服务器 A ──┐
+              │     IX 服务器        
+前置服务器 B ──┼──── (单端口) ────┬── 目标服务器 1
+              │                  ├── 目标服务器 2
+前置服务器 C ──┘                  └── 目标服务器 3
+```
 
 ---
 
