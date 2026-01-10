@@ -37,13 +37,13 @@ for arg in "$@"; do
         datadir=*|data-dir=*)
             DATA_DIR="${arg#*=}"
             ;;
-        --uninstall)
+        --uninstall|uninstall)
             ACTION="uninstall"
             ;;
-        --update)
+        --update|update)
             ACTION="update"
             ;;
-        --help|-h)
+        --help|-h|help)
             ACTION="help"
             ;;
         *)
