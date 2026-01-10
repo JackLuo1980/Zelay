@@ -50,12 +50,12 @@ bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_manage
 
 **面板更新**
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_manager.sh) --update
+bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_manager.sh) update
 ```
 
 **Agent更新**
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_agent.sh) --update
+bash <(curl -fsSL https://raw.githubusercontent.com/enp6/Zelay/main/zelay_agent.sh) update
 ```
 
 **卸载面板**
